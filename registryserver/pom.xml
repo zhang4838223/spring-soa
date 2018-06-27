@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.zxj.soa</groupId>
+  <artifactId>registry-server</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>registry-server Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <mysql-connector.version>5.1.18</mysql-connector.version>
+    <!-- spring版本号 -->
+    <spring.version>5.0.5.RELEASE</spring.version>
+    <!-- mybatis版本号 -->
+    <mybatis.version>3.3.0</mybatis.version>
+    <!-- mybatis+spring -->
+    <mybatisspring.version>1.2.3</mybatisspring.version>
+    <paginator.version>1.2.15</paginator.version>
+    <!-- json -->
+    <json.version>1.9.13</json.version>
+    <!-- ojdbc -->
+    <ojdbc.version>11.2.0.1.0</ojdbc.version>
+    <!-- servlet api -->
+    <servlet.version>2.5</servlet.version>
+    <!-- freemarker -->
+    <freemarker.version>2.3.23</freemarker.version>
+    <!-- commons pool -->
+    <commonspool.version>1.6</commonspool.version>
+    <!-- commons dbcp -->
+    <commonsdbcp.version>1.4</commonsdbcp.version>
+    <commons-net.version>3.3</commons-net.version>
+    <!-- jackson -->
+    <jackson.version>2.22.1</jackson.version>
+    <jackson-databind.version>2.9.5</jackson-databind.version>
+    <jettison.version>1.3.7</jettison.version>
+    <aspectj>1.8.9</aspectj>
+    <jedis.version>2.7.2</jedis.version>
+    <druid.version>1.0.16</druid.version>
+    <commons-logging.version>1.1</commons-logging.version>
+    <cglib-nodep.version>2.1_3</cglib-nodep.version>
+    <commons-beanutils.version>1.9.2</commons-beanutils.version>
+    <guava.version>18.0</guava.version>
+    <commons.lang.version>2.5</commons.lang.version>
+    <junit.version>4.11</junit.version>
+    <httpclient.version>4.4.1</httpclient.version>
+    <ibatis2-sqlmap.version>2.1.7.597</ibatis2-sqlmap.version>
+    <logback.version>1.1.2</logback.version>
+    <jackson-core.version>2.9.5</jackson-core.version>
+    <slf4j-api.version>1.7.12</slf4j-api.version>
+    <pinyin4j.version>2.5.0</pinyin4j.version>
+    <powermock.version>1.4.12</powermock.version>
+    <plexus-classworlds.version>2.2.2</plexus-classworlds.version>
+    <plexus-container-default.version>1.5.5</plexus-container-default.version>
+    <plexus-utils.version>3.0.8</plexus-utils.version>
+    <foundation-service.version>2.2.0</foundation-service.version>
+    <xbean.version>3.4</xbean.version>
+    <netty.version>4.0.3.Final</netty.version>
+    <kraken.allInOne.version>1.3.1.0-RELEASE</kraken.allInOne.version>
+    <httpmime.version>4.4-alpha1</httpmime.version>
+    <!-- 设置工程为utf8编码 -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring-data-mongodb.version>1.8.2.RELEASE</spring-data-mongodb.version>
+    <javax.persistence>1.0</javax.persistence>
+    <log-client.version>1.5.5.7-RELEASE</log-client.version>
+    <log-client-ext.version>0.2.2.5-RELEASE</log-client-ext.version>
+
+    <jmail.version>1.4.7</jmail.version>
+    <poi.version>3.10-FINAL</poi.version>
+    <poi-ooxml.version>3.10-FINAL</poi-ooxml.version>
+    <poi-ooxml-schemas.version>3.10-FINAL</poi-ooxml-schemas.version>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>${poi.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>${poi-ooxml.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml-schemas</artifactId>
+      <version>${poi-ooxml-schemas.version}</version>
+    </dependency>
+
+    <!-- Excel导出 -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql-connector.version}</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>persistence-api</artifactId>
+      <version>${javax.persistence}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-net</groupId>
+      <artifactId>commons-net</artifactId>
+      <version>${commons-net.version}</version>
+    </dependency>
+    <!-- oracle驱动包 -->
+    <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>ojdbc6</artifactId>
+      <version>${ojdbc.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${httpclient.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.ibatis</groupId>
+      <artifactId>ibatis2-sqlmap</artifactId>
+      <version>${ibatis2-sqlmap.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>${commons.lang.version}</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>${jedis.version}</version>
+    </dependency>
+    <!-- mybatis 分页插件 -->
+    <dependency>
+      <groupId>com.github.miemiedev</groupId>
+      <artifactId>mybatis-paginator</artifactId>
+      <version>${paginator.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>${druid.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>${commons-logging.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-oxm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aop</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <!-- springframe end -->
+    <!-- mongodb start -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-mongodb</artifactId>
+      <version>${spring-data-mongodb.version}</version>
+    </dependency>
+    <!-- mongodb end -->
+    <!-- mybatis核心包 -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${mybatis.version}</version>
+    </dependency>
+    <!-- mybatis/spring包 -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>${mybatisspring.version}</version>
+    </dependency>
+    <!-- json数据 -->
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>${json.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson-databind.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>${servlet.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>${freemarker.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-pool</groupId>
+      <artifactId>commons-pool</artifactId>
+      <version>${commonspool.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>${commonsdbcp.version}</version>
+    </dependency>
+    <!-- log end -->
+    <!-- jackson -->
+    <dependency>
+      <groupId>org.glassfish.jersey.media</groupId>
+      <artifactId>jersey-media-json-jackson</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jettison</groupId>
+      <artifactId>jettison</artifactId>
+      <version>${jettison.version}</version>
+    </dependency>
+
+    <!-- AOP -->
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>${aspectj}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>${aspectj}</version>
+    </dependency>
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib-nodep</artifactId>
+      <version>${cglib-nodep.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>${commons-beanutils.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson-core.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j-api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.belerweb</groupId>
+      <artifactId>pinyin4j</artifactId>
+      <version>${pinyin4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-classworlds</artifactId>
+      <version>${plexus-classworlds.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-container-default</artifactId>
+      <version>${plexus-container-default.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>google-collections</artifactId>
+          <groupId>com.google.collections</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+      <version>${plexus-utils.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.unidal.framework</groupId>
+      <artifactId>foundation-service</artifactId>
+      <version>${foundation-service.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.xbean</groupId>
+      <artifactId>xbean-reflect</artifactId>
+      <version>${xbean.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>${netty.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpmime</artifactId>
+      <version>${httpmime.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- 发邮件 -->
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>${jmail.version}</version><!--$NO-MVN-MAN-VER$-->
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <finalName>registry-server</finalName>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.7.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.20.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
