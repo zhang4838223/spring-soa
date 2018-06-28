@@ -47,6 +47,7 @@ public class NettyClient {
             protected void initChannel(SocketChannel ch) throws Exception {
                 ch.pipeline().addLast(new HttpResponseDecoder())
                     .addLast(new HttpRequestEncoder())
+                    .addLast(new HttpJsonRequestEncoder())
                     .addLast(new HttpClientInboundHandler());
             }
         });

@@ -48,8 +48,8 @@ public class RegistryMonitor {
 
     public void registry() {
         List<RegistryPO> exports = getExporters();
-//        regist(exports);
-        doRegist(exports);
+        regist(exports);
+//        doRegist(exports);
     }
 
     private void doRegist(List<RegistryPO> exports) {

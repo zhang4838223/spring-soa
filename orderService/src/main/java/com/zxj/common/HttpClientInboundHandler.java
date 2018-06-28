@@ -29,4 +29,9 @@ public class HttpClientInboundHandler extends ChannelInboundHandlerAdapter {
         }
 
     }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("连接上服务器...");
+    }
 }
