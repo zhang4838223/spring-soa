@@ -1,7 +1,4 @@
-package com.zxj.registry.model;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.zxj.model;
 
 /**
  * @Description:
