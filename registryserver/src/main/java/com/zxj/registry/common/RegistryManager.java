@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class RegistryManager {
 
-    private static ConcurrentHashMap<String, List<String>> urlMap = new ConcurrentHashMap<String, List<String>>();
+    private static ConcurrentHashMap<String, List<RegistryPO>> urlMap = new ConcurrentHashMap<String, List<RegistryPO>>();
     private static RegistryManager instance = new RegistryManager();
 
     private RegistryManager(){}
@@ -25,11 +25,11 @@ public class RegistryManager {
     }
 
     public void loadService(RegistryPO registryPO) {
-        List<String> addrs = urlMap.get(registryPO.getUri());
+        List<RegistryPO> addrs = urlMap.get(registryPO.getUri());
         if (CollectionUtils.isEmpty(addrs)) {
-            urlMap.put(registryPO.getUri(), Lists.newArrayList(registryPO.getAddr()));
+            urlMap.put(registryPO.getUri(), Lists.newArrayList(registryPO));
         } else {
-            addrs.add(registryPO.getAddr());
+            addrs.add(registryPO);
         }
     }
 }

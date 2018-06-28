@@ -11,8 +11,12 @@ import java.util.List;
 public class RegistryPO {
 
     private String uri;
+    //IP:PORT
     private String addr;
-
+    //超时时间
+    private long timeout;
+    //负载均衡策略
+    private byte loadBalanceType;
     public String getUri() {
         return uri;
     }
@@ -27,5 +31,21 @@ public class RegistryPO {
 
     public void setAddr(String addr) {
         this.addr = addr;
+    }
+
+    public long getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(long timeout) {
+        this.timeout = timeout;
+    }
+
+    public byte getLoadBalanceType() {
+        return loadBalanceType;
+    }
+
+    public void setLoadBalanceType(byte loadBalanceType) {
+        this.loadBalanceType = loadBalanceType;
     }
 }
