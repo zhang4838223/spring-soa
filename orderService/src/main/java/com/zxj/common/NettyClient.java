@@ -8,6 +8,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpRequestEncoder;
 import io.netty.handler.codec.http.HttpResponseDecoder;
 import org.apache.commons.lang.StringUtils;
@@ -39,7 +40,8 @@ public class NettyClient {
                         ch.pipeline().addLast(new HttpResponseDecoder())
                                 .addLast(new HttpRequestEncoder())
                                 .addLast(new HttpJsonRequestEncoder())
-                                .addLast(new HttpClientInboundHandler());
+                                .addLast(new HttpClientInboundHandler())
+                                .addLast(new HttpObjectAggregator(512 * 1024));
                     }
                 });
     }
