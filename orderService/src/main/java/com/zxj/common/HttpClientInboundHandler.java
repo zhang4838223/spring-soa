@@ -15,10 +15,13 @@ import io.netty.handler.codec.http.HttpResponse;
 public class HttpClientInboundHandler extends ChannelInboundHandlerAdapter {
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof HttpResponse) {
             HttpResponse response = (HttpResponse)msg;
             System.out.println("CONTENT_TYPE:" + response.headers().get(HttpHeaders.Names.CONTENT_TYPE));
+            if (response.getStatus().code() == 200) {
+                System.out.println("======================服务注册成功======================");
+            }
         }
 
         if (msg instanceof HttpContent) {
@@ -32,6 +35,14 @@ public class HttpClientInboundHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("连接上服务器...");
+        super.channelActive(ctx);
+        System.out.println("连接上注册中心服务器...");
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
+            throws Exception {
+        System.out.println("error:" + cause);
+        ctx.close();
     }
 }

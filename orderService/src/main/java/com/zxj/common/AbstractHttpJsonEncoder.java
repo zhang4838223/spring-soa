@@ -20,6 +20,7 @@ public abstract class AbstractHttpJsonEncoder<T> extends MessageToMessageEncoder
 
     protected ByteBuf encode(ChannelHandlerContext ctx, Object body) throws Exception {
         String json = gson.toJson(body);
+        System.out.println(json);
         ByteBuf byteBuf = Unpooled.copiedBuffer(json, UTF_8);
         return byteBuf;
     }

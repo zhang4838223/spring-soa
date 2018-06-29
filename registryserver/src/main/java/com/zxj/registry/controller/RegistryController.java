@@ -23,6 +23,7 @@ public class RegistryController {
     @ResponseBody
     public SoaResponse loadService(@RequestBody RegistryPO registry) {
         RegistryManager.getInstance().loadService(registry);
+        System.out.println("======================"+registry.getUri()+"服务注册成功======================");
         return new SoaResponse(200, "succ");
     }
 

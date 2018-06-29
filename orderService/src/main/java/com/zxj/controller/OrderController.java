@@ -23,4 +23,10 @@ public class OrderController {
         System.out.println(JSONUtils.toJSONString(request));
         return new SoaResponse(200, "succ");
     }
+
+    @RequestMapping(value = "order/cancelOrderByCode", method = RequestMethod.POST)
+    @ResponseBody
+    public SoaResponse cancelOrderByCode(@RequestBody OrderRequest request){
+        return new SoaResponse(200, "succ");
+    }
 }

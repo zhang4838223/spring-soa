@@ -45,6 +45,7 @@ public class HttpJsonRequestEncoder extends AbstractHttpJsonEncoder<HttpJsonRequ
                     "text/html,application/json;q=0.9,*/*;q=0.8");
             headers.set(HttpHeaders.Names.CONTENT_LENGTH, body.readableBytes());
             headers.set(HttpHeaders.Names.CONTENT_TYPE, "application/json;charset=UTF-8");
+            System.out.println("*******************************");
         }
 //        HttpUtil.setContentLength(request, body.readableBytes());
         // (3) 编码后的对象
