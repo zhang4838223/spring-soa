@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @Description:
@@ -18,6 +19,7 @@ public class RegistryManager {
 
     private static ConcurrentHashMap<String, List<RegistryPO>> urlMap = new ConcurrentHashMap<String, List<RegistryPO>>();
     private static RegistryManager instance = new RegistryManager();
+    private static ReentrantLock locker = new ReentrantLock();
 
     private RegistryManager(){}
 
@@ -30,10 +32,15 @@ public class RegistryManager {
         if (CollectionUtils.isEmpty(addrs)) {
             urlMap.put(registryPO.getUri(), Lists.newArrayList(registryPO));
         } else {
+            List<RegistryPO> newAddr = Lists.newArrayList();
             for (RegistryPO po : addrs) {
-                if (po.getUri().equals(registryPO.getUri())) {
-                    addrs.add(registryPO);
+                if (!po.getUri().equals(registryPO.getUri())) {
+                    newAddr.add(registryPO);
                 }
+            }
+
+            if (!CollectionUtils.isEmpty(newAddr)) {
+                addrs.addAll(newAddr);
             }
         }
     }
