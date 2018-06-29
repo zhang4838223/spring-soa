@@ -5,6 +5,7 @@ import com.zxj.registry.model.RegistryPO;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -29,7 +30,22 @@ public class RegistryManager {
         if (CollectionUtils.isEmpty(addrs)) {
             urlMap.put(registryPO.getUri(), Lists.newArrayList(registryPO));
         } else {
-            addrs.add(registryPO);
+            for (RegistryPO po : addrs) {
+                if (po.getUri().equals(registryPO.getUri())) {
+                    addrs.add(registryPO);
+                }
+            }
         }
+    }
+
+    public List<RegistryPO> getAllService() {
+       Collection<List<RegistryPO>> values = urlMap.values();
+        ArrayList<RegistryPO> result = Lists.newArrayList();
+        for (List<RegistryPO> list : values) {
+            for (RegistryPO po : list) {
+                result.add(po);
+            }
+       }
+        return result;
     }
 }

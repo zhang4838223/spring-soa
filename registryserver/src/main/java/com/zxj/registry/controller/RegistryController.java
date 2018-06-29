@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * @Description:
  * @Author:zhangxiaojun
@@ -23,4 +25,12 @@ public class RegistryController {
         RegistryManager.getInstance().loadService(registry);
         return new SoaResponse(200, "succ");
     }
+
+    @RequestMapping(value = "regist/getAllService", method = RequestMethod.GET)
+    @ResponseBody
+    public List<RegistryPO> getAllService() {
+        List<RegistryPO> list = RegistryManager.getInstance().getAllService();
+        return list;
+    }
+
 }
