@@ -32,6 +32,7 @@ public class NettyClient {
         bootstrap = new Bootstrap();
         bootstrap.group(group).channel(NioSocketChannel.class)
                 .option(ChannelOption.SO_REUSEADDR, Boolean.TRUE)
+                .option(ChannelOption.TCP_NODELAY, true)
                 .option(ChannelOption.SO_KEEPALIVE, Boolean.TRUE)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override

@@ -56,7 +56,7 @@ public class RegistryMonitor {
             StringBuilder sb = new StringBuilder();
             sb.append("http://").append(addr).append(loadServicePathc);
             try {
-                NettyClient.write(addr, "", sb.toString());
+                NettyClient.write(addr, "====", sb.toString());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
