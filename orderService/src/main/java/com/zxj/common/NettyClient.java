@@ -30,7 +30,6 @@ public class NettyClient {
 
     private static Bootstrap bootstrap = null;
     private static EventLoopGroup group = new NioEventLoopGroup();
-    private static EventLoopGroup bossGroup = new NioEventLoopGroup();
 
     public static void init() {
         bootstrap = new Bootstrap();
@@ -43,8 +42,8 @@ public class NettyClient {
                         ch.pipeline().addLast(new HttpResponseDecoder())
                                 .addLast(new HttpRequestEncoder())
                                 .addLast(new HttpJsonRequestEncoder())
-                                .addLast(new HttpClientInboundHandler())
-                                .addLast(new HttpObjectAggregator(512 * 1024));
+                                .addLast(new HttpObjectAggregator(512 * 1024))
+                                .addLast(new HttpClientInboundHandler());
                     }
                 });
     }
