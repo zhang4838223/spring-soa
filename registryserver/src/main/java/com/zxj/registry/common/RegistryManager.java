@@ -55,4 +55,10 @@ public class RegistryManager {
        }
         return result;
     }
+
+    public void loadService(List<RegistryPO> registries) {
+        for (RegistryPO registryPO : registries){
+            loadService(registryPO);
+        }
+    }
 }

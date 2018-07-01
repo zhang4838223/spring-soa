@@ -5,7 +5,8 @@ import com.google.gson.Gson;
 import com.zxj.common.HttpJsonRequest;
 import com.zxj.common.HttpUtil;
 import com.zxj.common.NettyClient;
-import com.zxj.model.RegistryPO;
+import com.zxj.registry.model.RegistryPO;
+import com.zxj.registry.model.SoaRequest;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -58,11 +59,9 @@ public class RegistryMonitor {
             StringBuilder sb = new StringBuilder();
             sb.append("http://").append(addr).append(registryPath);
             try {
-                Channel channel = NettyClient.getChannel(addr);
-                for (RegistryPO po : exports) {
-                    HttpJsonRequest req = new HttpJsonRequest(null, po, sb.toString());
-                    channel.writeAndFlush(req);
-                }
+                SoaRequest request = new SoaRequest();
+                request.setRegistryPOList(new ArrayList<RegistryPO>(exports));
+                NettyClient.write(addr, request, sb.toString());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

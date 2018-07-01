@@ -1,5 +1,6 @@
 package com.zxj.common;
 
+import com.zxj.registry.model.RegistryPO;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -13,6 +14,7 @@ import io.netty.handler.codec.http.HttpRequestEncoder;
 import io.netty.handler.codec.http.HttpResponseDecoder;
 import org.apache.commons.lang.StringUtils;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,6 +30,7 @@ public class NettyClient {
 
     private static Bootstrap bootstrap = null;
     private static EventLoopGroup group = new NioEventLoopGroup();
+    private static EventLoopGroup bossGroup = new NioEventLoopGroup();
 
     public static void init() {
         bootstrap = new Bootstrap();
@@ -78,5 +81,10 @@ public class NettyClient {
         }
 
         group.shutdownGracefully();
+    }
+
+    public static void write(String addr, Object exports, String registryUrl) throws InterruptedException {
+        HttpJsonRequest req = new HttpJsonRequest(null, exports, registryUrl);
+        getChannel(addr).writeAndFlush(req);
     }
 }

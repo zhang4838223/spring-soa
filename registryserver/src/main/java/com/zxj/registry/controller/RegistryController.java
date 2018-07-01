@@ -1,7 +1,9 @@
 package com.zxj.registry.controller;
 
+import com.google.common.collect.Lists;
 import com.zxj.registry.common.RegistryManager;
 import com.zxj.registry.model.RegistryPO;
+import com.zxj.registry.model.SoaRequest;
 import com.zxj.registry.model.SoaResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,9 +23,11 @@ public class RegistryController {
 
     @RequestMapping(value = "regist/loadService", method = RequestMethod.POST)
     @ResponseBody
-    public SoaResponse loadService(@RequestBody RegistryPO registry) {
-        RegistryManager.getInstance().loadService(registry);
-        System.out.println("======================"+registry.getUri()+"服务注册成功======================");
+    public SoaResponse loadService(@RequestBody SoaRequest request) {
+        RegistryManager.getInstance().loadService(request.getRegistryPOList());
+        for (RegistryPO registry : request.getRegistryPOList()) {
+            System.out.println("======================" + registry.getUri() + "服务注册成功======================");
+        }
         return new SoaResponse(200, "succ");
     }
 
