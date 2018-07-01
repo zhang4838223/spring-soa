@@ -35,6 +35,8 @@ public class RegistryMonitor {
     private String applicationName;
     //注册中心接口路径
     private String registryPath = "/soa/regist/loadService";
+    //获取注册服务
+    private String loadServicePathc = "/soa/regist/getAllService";
 
     private Gson gson = new Gson();
 
@@ -44,7 +46,21 @@ public class RegistryMonitor {
     public void registry() {
         List<RegistryPO> exports = getExporters();
         regist(exports);
+        loadService();
 //        doRegist(exports);
+    }
+
+    private void loadService() {
+        String[] addrs = registryAddr.split(";");
+        for (String addr : addrs) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("http://").append(addr).append(loadServicePathc);
+            try {
+                NettyClient.write(addr, "", sb.toString());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void doRegist(List<RegistryPO> exports) {

@@ -18,9 +18,8 @@ public abstract class AbstractHttpJsonEncoder<T> extends MessageToMessageEncoder
     private final static Charset UTF_8 = Charset.forName("utf-8");
     private static final Gson gson = new Gson();
 
-    protected ByteBuf encode(ChannelHandlerContext ctx, Object body) throws Exception {
+    protected ByteBuf encode(Object body) throws Exception {
         String json = gson.toJson(body);
-        System.out.println(json);
         ByteBuf byteBuf = Unpooled.copiedBuffer(json, UTF_8);
         return byteBuf;
     }

@@ -29,9 +29,6 @@ public class HttpClientInboundHandler extends ChannelInboundHandlerAdapter {
             System.out.println(buf.toString(io.netty.util.CharsetUtil.UTF_8));
             buf.release();
         }
-
-        System.out.println(msg);
-
     }
 
     @Override
@@ -45,5 +42,11 @@ public class HttpClientInboundHandler extends ChannelInboundHandlerAdapter {
             throws Exception {
         System.out.println("error:" + cause);
         ctx.close();
+    }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("==============channel-read-complete==============");
+        ctx.flush();
     }
 }

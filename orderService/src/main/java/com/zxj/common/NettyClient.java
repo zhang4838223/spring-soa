@@ -2,10 +2,7 @@ package com.zxj.common;
 
 import com.zxj.registry.model.RegistryPO;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -84,6 +81,7 @@ public class NettyClient {
 
     public static void write(String addr, Object exports, String registryUrl) throws InterruptedException {
         HttpJsonRequest req = new HttpJsonRequest(null, exports, registryUrl);
-        getChannel(addr).writeAndFlush(req);
+        Channel channel = getChannel(addr);
+        channel.writeAndFlush(req);
     }
 }
