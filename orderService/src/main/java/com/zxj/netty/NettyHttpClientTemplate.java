@@ -11,12 +11,13 @@ import java.util.concurrent.ExecutionException;
 public class NettyHttpClientTemplate {
 
     private final static Gson GSON = new Gson();
-    public <T> T postForEntity(String url, String body, Class<T> responseType) throws ExecutionException, InterruptedException {
+    public <T> T postForEntity(String url, Object body, Class<T> responseType) throws ExecutionException, InterruptedException {
 
         SimpleNettyHttpResponse response = null;
         try {
             //build request
-            Netty4HttpRequest httpRequst = NettyHttpRequstFactory.getFactory().createHttpRequst(url, body, HttpMethod.POST);
+            Netty4HttpRequest httpRequst = NettyHttpRequstFactory.getFactory().createHttpRequst(
+                    url, GSON.toJson(body), HttpMethod.POST);
             //do request
             response = httpRequst.execute().get();
             //parse response
