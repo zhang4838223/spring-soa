@@ -115,8 +115,7 @@ public class Netty4HttpRequest {
 
         @Override
         protected void channelRead0(ChannelHandlerContext channelHandlerContext, FullHttpResponse fullHttpResponse) throws Exception {
-            future.set(new SimpleNettyHttpResponse(fullHttpResponse.getStatus().code(),
-                    fullHttpResponse.content().toString(CharsetUtil.UTF_8)));
+            future.set(new SimpleNettyHttpResponse(fullHttpResponse, channelHandlerContext));
         }
 
         @Override

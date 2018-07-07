@@ -1,29 +1,32 @@
 package com.zxj.netty;
 
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.http.FullHttpResponse;
+import io.netty.util.CharsetUtil;
+
 public class SimpleNettyHttpResponse {
 
-    private int status;
+    private ChannelHandlerContext context;
 
-    private String content;
+    private FullHttpResponse response;
 
-    public SimpleNettyHttpResponse(int status, String content) {
-        this.status = status;
-        this.content = content;
+    public SimpleNettyHttpResponse(FullHttpResponse response, ChannelHandlerContext context) {
+        this.context = context;
+        this.response = response;
+        response.retain();
     }
 
     public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
+        return response.getStatus().code();
     }
 
     public String getContent() {
-        return content;
+        return response.content().toString(CharsetUtil.UTF_8);
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void close() {
+        response.release();
+        context.close();
     }
+
 }
