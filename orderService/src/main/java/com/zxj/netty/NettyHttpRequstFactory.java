@@ -54,6 +54,13 @@ public class NettyHttpRequstFactory {
 
     public Netty4HttpRequest createHttpRequst(String url, String body, HttpMethod method){
 
-        return new Netty4HttpRequest(url, body, buildBootstrap(), method);
+        return new Netty4HttpRequest(url, body, getBootstrap(), method);
+    }
+
+    private Bootstrap getBootstrap() {
+        if (bootstrap == null) {
+            bootstrap = buildBootstrap();
+        }
+        return bootstrap;
     }
 }
