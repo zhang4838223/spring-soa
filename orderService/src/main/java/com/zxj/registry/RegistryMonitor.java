@@ -5,8 +5,10 @@ import com.google.gson.Gson;
 import com.zxj.common.HttpJsonRequest;
 import com.zxj.common.HttpUtil;
 import com.zxj.common.NettyClient;
+import com.zxj.netty.NettyHttpClientTemplate;
 import com.zxj.registry.model.RegistryPO;
 import com.zxj.registry.model.SoaRequest;
+import com.zxj.registry.model.SoaResponse;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @Description:
@@ -33,6 +36,9 @@ public class RegistryMonitor {
     private String applicationPort;
     //当前应用名
     private String applicationName;
+    //NettyTemplate
+    @Autowired
+    private NettyHttpClientTemplate template;
     //注册中心接口路径
     private String registryPath = "/soa/regist/loadService";
     //获取注册服务
@@ -45,9 +51,28 @@ public class RegistryMonitor {
 
     public void registry() {
         List<RegistryPO> exports = getExporters();
-        regist(exports);
-        loadService();
+        registWithTemplate(exports);
+//        regist(exports);
+//        loadService();
 //        doRegist(exports);
+    }
+
+    private void registWithTemplate(List<RegistryPO> exports) {
+        String[] addrs = registryAddr.split(";");
+        for (String addr : addrs) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("http://").append(addr).append(registryPath);
+            try {
+                SoaRequest request = new SoaRequest();
+                request.setRegistryPOList(new ArrayList<RegistryPO>(exports));
+                SoaResponse soaResponse = template.postForEntity(sb.toString(), request, SoaResponse.class);
+                System.out.println(soaResponse.getMsgText());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void loadService() {

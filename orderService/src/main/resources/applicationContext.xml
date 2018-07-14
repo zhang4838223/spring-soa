@@ -11,7 +11,7 @@
 http://www.springframework.org/schema/aop/spring-aop-4.3.xsd"
 	default-autowire="byName">
 
-	<context:component-scan base-package="com.zxj.**.service">
+	<context:component-scan base-package="com.zxj.**">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>

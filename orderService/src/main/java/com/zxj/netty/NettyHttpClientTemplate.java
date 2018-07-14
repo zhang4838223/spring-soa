@@ -4,10 +4,12 @@ package com.zxj.netty;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 
 import java.net.MalformedURLException;
 import java.util.concurrent.ExecutionException;
 
+@Component
 public class NettyHttpClientTemplate {
 
     private final static Gson GSON = new Gson();
