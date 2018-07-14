@@ -1,4 +1,4 @@
-package com.zxj.netty;
+package com.zxj.soa.common.netty;
 
 import java.util.concurrent.*;
 

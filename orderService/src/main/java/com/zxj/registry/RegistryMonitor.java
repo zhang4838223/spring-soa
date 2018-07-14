@@ -4,10 +4,10 @@ import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.zxj.common.HttpUtil;
 import com.zxj.common.NettyClient;
-import com.zxj.netty.NettyHttpClientTemplate;
 import com.zxj.soa.common.model.RegistryPO;
 import com.zxj.soa.common.model.SoaRequest;
 import com.zxj.soa.common.model.SoaResponse;
+import com.zxj.soa.common.netty.NettyHttpClientTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
@@ -64,7 +64,7 @@ public class RegistryMonitor {
                 SoaRequest request = new SoaRequest();
                 request.setRegistryPOList(new ArrayList<RegistryPO>(exports));
                 SoaResponse soaResponse = template.postForEntity(sb.toString(), request, SoaResponse.class);
-                System.out.println(soaResponse.getMsgText());
+                System.out.println("--------------> 服务注册：" + soaResponse.getMsgText());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {

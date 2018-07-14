@@ -1,7 +1,5 @@
-package com.zxj.netty;
+package com.zxj.soa.common.netty;
 
-import com.zxj.common.HttpClientInboundHandler;
-import com.zxj.common.HttpJsonRequestEncoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;

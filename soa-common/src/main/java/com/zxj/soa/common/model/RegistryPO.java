@@ -15,14 +15,14 @@ public class RegistryPO {
     //负载均衡策略
     private byte loadBalanceType;
     //请求方式:post、get...
-    private String soaType;
+    private String requestMethod;
 
     public String getSoaType() {
-        return soaType;
+        return requestMethod;
     }
 
     public void setSoaType(String soaType) {
-        this.soaType = soaType;
+        this.requestMethod = soaType;
     }
 
     public String getUri() {

@@ -1,17 +1,15 @@
-package com.zxj.netty;
+package com.zxj.soa.common.netty;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.handler.codec.http.*;
-import io.netty.util.CharsetUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpMethod;
 
 import java.net.InetAddress;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;

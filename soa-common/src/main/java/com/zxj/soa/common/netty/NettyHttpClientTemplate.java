@@ -1,8 +1,7 @@
-package com.zxj.netty;
+package com.zxj.soa.common.netty;
 
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
