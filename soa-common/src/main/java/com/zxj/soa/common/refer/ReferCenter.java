@@ -21,7 +21,7 @@ public class ReferCenter {
     /**
      * 默认定时拉取注册中心服务间隔时间
      */
-    private long defaultInterval = 3000L;
+    private long defaultInterval = 3L;
     /**
      * applicationNmae与IP:port对应关系
      */
@@ -39,10 +39,10 @@ public class ReferCenter {
     //获取注册服务
     private static final String LOAD_SERVICE_PATH = "/soa/regist/getAllService";
 
-    ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
     //初始化加载注册中心服务到本地内存
     public void init() {
-        scheduledExecutorService.schedule(new ReferTask(registerAddr, template), defaultInterval, TimeUnit.MILLISECONDS);
+        Executors.newScheduledThreadPool(1)
+                .scheduleAtFixedRate(new ReferTask(registerAddr, template),3 , defaultInterval, TimeUnit.SECONDS);
     }
 
     public class ReferTask implements Runnable {
