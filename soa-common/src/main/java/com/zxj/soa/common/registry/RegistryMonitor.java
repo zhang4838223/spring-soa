@@ -49,6 +49,10 @@ public class RegistryMonitor {
 
     }
 
+    /**
+     * 当前应用服务需要注册到所有注册中心上
+     * @param exports
+     */
     private void registWithTemplate(List<RegistryPO> exports) {
         String[] addrs = registryAddr.split(";");
         for (String addr : addrs) {

@@ -157,6 +157,10 @@ public class ReferCenter {
         Set<String> remoteAddrs = (Set<String>)tempMap.get(appname);
         ArrayList<String> addrList = Lists.newArrayList(remoteAddrs);
 
+        if (remoteAddrs == null || remoteAddrs.size() == 0) {
+            return null;
+        }
+
         if (remoteAddrs.size() == 1) {
             return addrList.get(0);
         }
