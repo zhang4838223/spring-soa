@@ -2,14 +2,12 @@ package com.zxj.registry;
 
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
-import com.zxj.common.HttpJsonRequest;
 import com.zxj.common.HttpUtil;
 import com.zxj.common.NettyClient;
 import com.zxj.netty.NettyHttpClientTemplate;
-import com.zxj.registry.model.RegistryPO;
-import com.zxj.registry.model.SoaRequest;
-import com.zxj.registry.model.SoaResponse;
-import io.netty.channel.Channel;
+import com.zxj.soa.common.model.RegistryPO;
+import com.zxj.soa.common.model.SoaRequest;
+import com.zxj.soa.common.model.SoaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;

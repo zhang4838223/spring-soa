@@ -1,7 +1,6 @@
-package com.zxj.registry.model;
+package com.zxj.soa.common.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SoaRequest {
     private ArrayList<RegistryPO> registryPOList;

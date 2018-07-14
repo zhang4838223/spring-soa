@@ -1,4 +1,4 @@
-package com.zxj.registry.model;
+package com.zxj.soa.common.model;
 
 /**
  * @Description:

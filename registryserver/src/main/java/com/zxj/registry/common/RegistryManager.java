@@ -1,7 +1,7 @@
 package com.zxj.registry.common;
 
 import com.google.common.collect.Lists;
-import com.zxj.registry.model.RegistryPO;
+import com.zxj.soa.common.model.RegistryPO;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;

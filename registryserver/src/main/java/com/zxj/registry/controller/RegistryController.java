@@ -1,10 +1,9 @@
 package com.zxj.registry.controller;
 
-import com.google.common.collect.Lists;
 import com.zxj.registry.common.RegistryManager;
-import com.zxj.registry.model.RegistryPO;
-import com.zxj.registry.model.SoaRequest;
-import com.zxj.registry.model.SoaResponse;
+import com.zxj.soa.common.model.RegistryPO;
+import com.zxj.soa.common.model.SoaRequest;
+import com.zxj.soa.common.model.SoaResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

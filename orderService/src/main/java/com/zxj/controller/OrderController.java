@@ -2,7 +2,7 @@ package com.zxj.controller;
 
 import com.alibaba.druid.support.json.JSONUtils;
 import com.zxj.model.OrderRequest;
-import com.zxj.registry.model.SoaResponse;
+import com.zxj.soa.common.model.SoaResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
