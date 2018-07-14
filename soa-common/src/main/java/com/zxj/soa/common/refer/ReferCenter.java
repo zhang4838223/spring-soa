@@ -1,5 +1,7 @@
 package com.zxj.soa.common.refer;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.zxj.soa.common.model.RegistryPO;
 import com.zxj.soa.common.model.SoaServiceResponse;
@@ -143,5 +145,23 @@ public class ReferCenter {
         this.defaultInterval = defaultInterval;
     }
 
+    /**
+     * 根据应用name随机获取一个服务地址
+     * @param appname
+     * @return
+     */
+    public String getServiceAddr(String appname) {
+        HashMap<Object, Object> tempMap = Maps.newHashMap();
+        tempMap.putAll(addrMap);
+
+        Set<String> remoteAddrs = (Set<String>)tempMap.get(appname);
+        ArrayList<String> addrList = Lists.newArrayList(remoteAddrs);
+
+        if (remoteAddrs.size() == 1) {
+            return addrList.get(0);
+        }
+        return addrList.get(RandomUtils.nextInt(addrList.size()));
+
+    }
 
 }
