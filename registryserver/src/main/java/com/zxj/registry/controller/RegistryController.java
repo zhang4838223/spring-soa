@@ -4,6 +4,7 @@ import com.zxj.registry.common.RegistryManager;
 import com.zxj.soa.common.model.RegistryPO;
 import com.zxj.soa.common.model.SoaRequest;
 import com.zxj.soa.common.model.SoaResponse;
+import com.zxj.soa.common.model.SoaServiceResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,9 +33,12 @@ public class RegistryController {
 
     @RequestMapping(value = "regist/getAllService", method = RequestMethod.GET)
     @ResponseBody
-    public List<RegistryPO> getAllService() {
+    public SoaServiceResponse getAllService() {
+        SoaServiceResponse response = new SoaServiceResponse(200, "succ");
         List<RegistryPO> list = RegistryManager.getInstance().getAllService();
-        return list;
+        response.setList(list);
+
+        return response;
     }
 
 }

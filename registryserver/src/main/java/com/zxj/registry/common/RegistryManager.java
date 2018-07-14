@@ -27,7 +27,7 @@ public class RegistryManager {
         return instance;
     }
 
-    public void loadService(RegistryPO registryPO) {
+    public synchronized void loadService(RegistryPO registryPO) {
         List<RegistryPO> addrs = urlMap.get(registryPO.getUri());
         if (CollectionUtils.isEmpty(addrs)) {
             urlMap.put(registryPO.getUri(), Lists.newArrayList(registryPO));

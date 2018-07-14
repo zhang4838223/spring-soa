@@ -17,8 +17,12 @@ public class NettyHttpClientTemplate {
         SimpleNettyHttpResponse response = null;
         try {
             //build request
+            String param = null;
+            if (null != body) {
+                param = GSON.toJson(body);
+            }
             Netty4HttpRequest httpRequst = NettyHttpRequstFactory.getFactory().createHttpRequst(
-                    url, GSON.toJson(body), HttpMethod.POST);
+                    url, param, HttpMethod.POST);
             //do request
             response = httpRequst.execute().get();
             //parse response
