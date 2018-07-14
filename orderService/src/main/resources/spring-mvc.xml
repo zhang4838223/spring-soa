@@ -96,7 +96,7 @@
 	</bean>
 
 	<!--<bean id="handlerExceptionResolver" class="com.zhaogang.common.exception.GlobalExceptionHandler"></bean>-->
-	<bean id="registryMonitor" class="com.zxj.registry.RegistryMonitor" init-method="registry">
+	<bean id="registryMonitor" class="com.zxj.soa.common.registry.RegistryMonitor" init-method="registry">
 		<property name="registryAddr" value="${registryAddr}" />
 		<property name="applicationPort" value="${applicationPort}" />
 		<property name="applicationName" value="${applicationName}" />

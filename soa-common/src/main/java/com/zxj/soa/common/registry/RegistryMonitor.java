@@ -1,9 +1,7 @@
-package com.zxj.registry;
+package com.zxj.soa.common.registry;
 
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
-import com.zxj.common.HttpUtil;
-import com.zxj.common.NettyClient;
 import com.zxj.soa.common.model.RegistryPO;
 import com.zxj.soa.common.model.SoaRequest;
 import com.zxj.soa.common.model.SoaResponse;
@@ -39,8 +37,6 @@ public class RegistryMonitor {
     private NettyHttpClientTemplate template;
     //注册中心接口路径
     private String registryPath = "/soa/regist/loadService";
-    //获取注册服务
-    private String loadServicePathc = "/soa/regist/getAllService";
 
     private Gson gson = new Gson();
 
@@ -50,9 +46,7 @@ public class RegistryMonitor {
     public void registry() {
         List<RegistryPO> exports = getExporters();
         registWithTemplate(exports);
-//        regist(exports);
-//        loadService();
-//        doRegist(exports);
+
     }
 
     private void registWithTemplate(List<RegistryPO> exports) {
@@ -68,40 +62,6 @@ public class RegistryMonitor {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void loadService() {
-        String[] addrs = registryAddr.split(";");
-        for (String addr : addrs) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("http://").append(addr).append(loadServicePathc);
-            try {
-                NettyClient.write(addr, "====", sb.toString());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void doRegist(List<RegistryPO> exports) {
-        for (RegistryPO po : exports) {
-            HttpUtil.httpPostByCatchException(registryAddr, po);
-        }
-    }
-
-    private void regist(List<RegistryPO> exports) {
-        String[] addrs = registryAddr.split(";");
-        for (String addr : addrs) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("http://").append(addr).append(registryPath);
-            try {
-                SoaRequest request = new SoaRequest();
-                request.setRegistryPOList(new ArrayList<RegistryPO>(exports));
-                NettyClient.write(addr, request, sb.toString());
-            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
