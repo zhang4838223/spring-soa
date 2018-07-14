@@ -101,6 +101,11 @@
 		<property name="applicationPort" value="${applicationPort}" />
 		<property name="applicationName" value="${applicationName}" />
 	</bean>
+
+	<bean id="refer" class="com.zxj.soa.common.refer.ReferCenter" init-method="init">
+		<property name="registerAddr" value="${registryAddr}" />
+		<property name="defaultInterval" value="4000" />
+	</bean>
 	
 	<!--<bean class="com.zxj.registry.common.SpringContextContainer" lazy-init="false" />-->
 	

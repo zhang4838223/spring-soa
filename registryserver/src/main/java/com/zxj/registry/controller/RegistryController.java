@@ -31,13 +31,14 @@ public class RegistryController {
         return new SoaResponse(200, "succ");
     }
 
-    @RequestMapping(value = "regist/getAllService", method = RequestMethod.GET)
+    @RequestMapping(value = "regist/getAllService", method = RequestMethod.POST)
     @ResponseBody
     public SoaServiceResponse getAllService() {
         SoaServiceResponse response = new SoaServiceResponse(200, "succ");
         List<RegistryPO> list = RegistryManager.getInstance().getAllService();
         response.setList(list);
 
+        System.out.println("----------> 拉取注册服务");
         return response;
     }
 

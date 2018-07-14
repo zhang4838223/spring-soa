@@ -1,5 +1,6 @@
 package com.zxj.soa.common.refer;
 
+import com.google.common.collect.Sets;
 import com.zxj.soa.common.model.RegistryPO;
 import com.zxj.soa.common.model.SoaServiceResponse;
 import com.zxj.soa.common.netty.NettyHttpClientTemplate;
@@ -7,9 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -26,13 +25,13 @@ public class ReferCenter {
     /**
      * applicationNmae与IP:port对应关系
      */
-    private final static ConcurrentHashMap<String, List<String>> addrMap= new ConcurrentHashMap();
+    private ConcurrentHashMap<String, Set<String>> addrMap= new ConcurrentHashMap();
     /**
      * applicationNmae与URI对应关系
      */
-    private final static ConcurrentHashMap<String, List<String>> uriMap= new ConcurrentHashMap();
+    private ConcurrentHashMap<String, Set<String>> uriMap= new ConcurrentHashMap();
 
-    private static ReentrantLock locker = new ReentrantLock();
+    private ReentrantLock locker = new ReentrantLock();
     //NettyTemplate
     @Autowired
     private NettyHttpClientTemplate template;
@@ -40,13 +39,13 @@ public class ReferCenter {
     //获取注册服务
     private static final String LOAD_SERVICE_PATH = "/soa/regist/getAllService";
 
+    ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
     //初始化加载注册中心服务到本地内存
     public void init() {
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledExecutorService.schedule(new ReferTask(registerAddr, template), defaultInterval, TimeUnit.MILLISECONDS);
     }
 
-    public static class ReferTask implements Runnable {
+    public class ReferTask implements Runnable {
 
         private String registryAddr;
         private NettyHttpClientTemplate template;
@@ -58,19 +57,42 @@ public class ReferCenter {
                 sb.append("http://").append(addr).append(LOAD_SERVICE_PATH);
 
                 try {
-                    SoaServiceResponse response = template.postForEntity(sb.toString(), null, SoaServiceResponse.class);
+                    SoaServiceResponse response = template.postForEntity(sb.toString(), StringUtils.EMPTY, SoaServiceResponse.class);
                     if (null != response && response.getMsgCode() == 200){
                         List<RegistryPO> list = response.getList();
                         if (CollectionUtils.isEmpty(list)) {
                             return;
                         }
 
-                        if (addrMap.size() == 0 || uriMap.size() == 0) {
+                        locker.tryLock();
+                        try {
                             for (RegistryPO po : list) {
+                                //加载注册中心服务到本地缓存
                                 String uri = po.getUri();
+                                String[] args = uri.split("/");
+                                String ipNet = args[0];
+                                String appName = args[1];
+                                String serviceUri = createUri(args, 2);
+                                if (addrMap.containsKey(appName)) {
+                                    addrMap.get(appName).add(ipNet);
+                                } else {
+                                    addrMap.put(appName, Sets.newHashSet(ipNet));
+                                }
+
+                                if (uriMap.containsKey(appName)) {
+                                    uriMap.get(appName).add(serviceUri);
+                                } else {
+                                    uriMap.put(appName, Sets.newHashSet(serviceUri));
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            if (locker.isLocked()) {
+                                locker.unlock();
                             }
                         }
-
+                        System.out.println("--------->load registry service");
                     }
                 } catch (ExecutionException e) {
                     e.printStackTrace();
@@ -79,6 +101,14 @@ public class ReferCenter {
                 }
 
             }
+        }
+
+        private String createUri(String[] args, int i) {
+            StringBuffer sb = new StringBuffer();
+            for (int index = i; index < args.length; index++) {
+                sb.append(args[index]);
+            }
+            return sb.toString();
         }
 
         public ReferTask(String registryAddr, NettyHttpClientTemplate template) {
@@ -102,4 +132,6 @@ public class ReferCenter {
     public void setDefaultInterval(long defaultInterval) {
         this.defaultInterval = defaultInterval;
     }
+
+
 }
