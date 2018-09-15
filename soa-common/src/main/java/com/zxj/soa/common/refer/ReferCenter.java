@@ -129,22 +129,6 @@ public class ReferCenter {
         }
     }
 
-    public String getRegisterAddr() {
-        return registerAddr;
-    }
-
-    public void setRegisterAddr(String registerAddr) {
-        this.registerAddr = registerAddr;
-    }
-
-    public long getDefaultInterval() {
-        return defaultInterval;
-    }
-
-    public void setDefaultInterval(long defaultInterval) {
-        this.defaultInterval = defaultInterval;
-    }
-
     /**
      * 根据应用name随机获取一个服务地址
      * @param appname
@@ -166,6 +150,22 @@ public class ReferCenter {
         }
         return addrList.get(RandomUtils.nextInt(addrList.size()));
 
+    }
+
+    public String getRegisterAddr() {
+        return registerAddr;
+    }
+
+    public void setRegisterAddr(String registerAddr) {
+        this.registerAddr = registerAddr;
+    }
+
+    public long getDefaultInterval() {
+        return defaultInterval;
+    }
+
+    public void setDefaultInterval(long defaultInterval) {
+        this.defaultInterval = defaultInterval;
     }
 
 }
